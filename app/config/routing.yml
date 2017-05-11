@@ -1,3 +1,13 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /%locale%
+        permanent: true
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
