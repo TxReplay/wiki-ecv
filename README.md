@@ -1,4 +1,10 @@
-wiki-ecv
+# Wiki ECV
 ========
 
-A Symfony project created on May 11, 2017, 2:50 pm.
+### A project by :
+
+- Valentin Commenge (@txreplay) - Backend developer
+- David Maarek (@davidmaarek) - Backend developer
+- Mehdi Baudart (@mebaudart) - Frontend developer
+- Nicolas Heine (@skiland) - Frontend developer
+
