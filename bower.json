@@ -1,0 +1,24 @@
+{
+  "name": "wiki-ecv",
+  "description": "Notre super Wiki ECV",
+  "main": "index.js",
+  "authors": [
+    "David Maarek",
+    "Nicolas Heine",
+    "Valentin Commenge",
+    "Mehdi Baudart"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/bower_components/",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+  }
+}
