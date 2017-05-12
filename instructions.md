@@ -52,10 +52,10 @@ Modèle
 
 ## PageRevision
 * id
-* page_id
-* title
-* status : online|pending_validation|canceled|draft
-* content
+* .page_id
+* .title
+* .status : online|pending_validation|canceled|draft
+* .content
 * updated_by
 * created_at
 * updated_at
@@ -68,42 +68,43 @@ Modèle
 * created_at
 * updated_at
 
+
 Routing API
 ===========
 /api/v1/
 ## User
   * /user
-    * POST /
-    * GET /{id}
-    * PUT /{id}
-    * DELETE /{id}
-    * POST /login
-    * GET /logout
+    * .POST /
+    * .GET /{id}
+    * .PUT /{id}
+    * .DELETE /{id}
+    * .POST /login
+    * .GET /logout
 
 ## Page
   * /page
-    * POST /
-    * GET /{slug}
-    * PUT /{slug}
-    * DELETE /{slug}
+    * .POST /
+    * .GET /{slug}
+    * .PUT /{slug}
+    * .DELETE /{slug}
     * Last : GET /last?limit=10&offset=0
     * BestRated : GET /best_rated?limit=10&offset=0
     * Search : GET /search?q=QUERYlimit=10&offset=0
 
 ## PageRevision
   * /page/{page_slug}/revision
-    * POST /
-    * GET /{id}
-    * PUT /{id}
-    * DELETE /{id}
+    * .POST /
+    * .GET /{id}
+    * .PUT /{id}
+    * .DELETE /{id}
     * AllForPage GET /all?status=online
 
 ## Rating
 * /page/{page_slug}/revision/{revision_id}/rate
-    * POST /
-    * GET /{id}
-    * PUT /{id}
-    * DELETE /{id}
+    * .POST /
+    * .GET /{id}
+    * .PUT /{id}
+    * .DELETE /{id}
 
 Front (Angular)
 

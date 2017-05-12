@@ -1,23 +1,24 @@
 app:
-    resource: '@AppBundle/Controller/'
+    resource: '@AppBundle/Controller/FrontController.php'
     type: annotation
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+# FOSRest Routing
 users:
     type: rest
-    resource: "@AppBundle/Controller/ApiUserController.php"
+    resource: AppBundle\Controller\ApiUserController
 
 pages:
     type: rest
-    resource: "@AppBundle/Controller/ApiPageController.php"
+    resource: AppBundle\Controller\ApiPageController
 
 revisions:
     type: rest
-    parent: pages
-    resource: "@AppBundle/Controller/ApiPageController.php"
+#    parent: pages
+    resource: AppBundle\Controller\ApiPageRevisionController
 
 ratings:
     type: rest
-    resource: "@AppBundle/Controller/ApiPageController.php"
+    resource: AppBundle\Controller\ApiPageController
