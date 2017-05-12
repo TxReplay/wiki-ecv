@@ -25,6 +25,9 @@ class AppKernel extends Kernel
 
             // KNP Bundles
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+
+            // Nelmio Bundles (Documentation API)
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

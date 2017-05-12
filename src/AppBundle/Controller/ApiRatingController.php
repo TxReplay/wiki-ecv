@@ -20,4 +20,13 @@ class ApiRatingController extends FOSRestController
     public function putRatingAction($id) {}
 
     public function deleteRatingAction($id) {}
+
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    private function getUserRepository()
+    {
+        return $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Rating');
+
+    }
 }

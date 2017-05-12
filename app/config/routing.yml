@@ -9,3 +9,7 @@ fos_rest:
     type: rest
     resource: routing_fos_rest.yml
     prefix: '/api/%api_version%/'
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

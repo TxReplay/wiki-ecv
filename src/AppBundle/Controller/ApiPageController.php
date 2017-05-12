@@ -20,4 +20,13 @@ class ApiPageController extends FOSRestController
     public function putPageAction($id) {}
 
     public function deletePageAction($id) {}
+
+    /**
+     * @return \AppBundle\Repository\PageRepository|\Doctrine\ORM\EntityRepository
+     */
+    private function getUserRepository()
+    {
+        return $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Page');
+
+    }
 }

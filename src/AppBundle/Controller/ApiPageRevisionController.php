@@ -20,4 +20,13 @@ class ApiPageRevisionController extends FOSRestController
     public function putRevisionAction($id) {}
 
     public function deleteRevisionAction($id) {}
+
+    /**
+     * @return \AppBundle\Repository\PageRevisionRepository|\Doctrine\ORM\EntityRepository
+     */
+    private function getUserRepository()
+    {
+        return $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:PageRevision');
+
+    }
 }
