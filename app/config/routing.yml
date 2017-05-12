@@ -5,20 +5,7 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-# FOSRest Routing
-users:
+fos_rest:
     type: rest
-    resource: AppBundle\Controller\ApiUserController
-
-pages:
-    type: rest
-    resource: AppBundle\Controller\ApiPageController
-
-revisions:
-    type: rest
-#    parent: pages
-    resource: AppBundle\Controller\ApiPageRevisionController
-
-ratings:
-    type: rest
-    resource: AppBundle\Controller\ApiPageController
+    resource: routing_fos_rest.yml
+    prefix: '/api/%api_version%/'
