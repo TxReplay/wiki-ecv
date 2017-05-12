@@ -6,8 +6,11 @@ use AppBundle\Controller\ApiController;
 
 class ApiPageRevisionController extends ApiController
 {
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
+    public function postRevisionAction() {}
+
+    public function getRevisionAction($id) {}
+
+    public function putRevisionAction($id) {}
+
+    public function deleteRevisionAction($id) {}
 }

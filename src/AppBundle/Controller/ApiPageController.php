@@ -6,8 +6,11 @@ use AppBundle\Controller\ApiController;
 
 class ApiPageController extends ApiController
 {
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
+    public function postPageAction() {}
+
+    public function getPageAction($id) {}
+
+    public function putPageAction($id) {}
+
+    public function deletePageAction($id) {}
 }

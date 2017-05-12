@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -21,9 +22,53 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PageRevision", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $revisions;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRevisions()
+    {
+        return $this->revisions;
+    }
+
+    /**
+     * @param ArrayCollection $revisions
+     */
+    public function setRevisions($revisions)
+    {
+        $this->revisions = $revisions;
+    }
+
+
+    /////////////////
+    //  FUNCTIONS  //
+    /////////////////
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->revisions = new ArrayCollection();
     }
 }
