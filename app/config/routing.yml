@@ -1,13 +1,15 @@
 app:
-    resource: '@AppBundle/Controller/'
+    resource: '@AppBundle/Controller/FrontController.php'
     type: annotation
-
-root:
-    path: /
-    defaults:
-        _controller: FrameworkBundle:Redirect:urlRedirect
-        path: /%locale%
-        permanent: true
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_rest:
+    type: rest
+    resource: routing_fos_rest.yml
+    prefix: '/api/%api_version%/'
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

@@ -22,6 +22,12 @@ class AppKernel extends Kernel
             // FOS Bundles
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+
+            // KNP Bundles
+            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+
+            // Nelmio Bundles (Documentation API)
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
