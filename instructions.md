@@ -136,3 +136,21 @@ Front (Angular)
 
 ### /page/{slug}/history
 * utilisateurs ayant contribués
+
+
+
+
+  post_user           POST       /users.{_format}                   
+  get_user            GET        /users/{id}.{_format}              
+  put_user            PUT        /users/{id}.{_format}              
+  delete_user         DELETE     /users/{id}.{_format}              
+  post_user_login     POST       /users/logins.{_format}            
+  get_user_logout     GET        /user/logout.{_format}             
+  post_revision       POST       /revisions.{_format}               
+  get_revision        GET        /revisions/{id}.{_format}          
+  put_revision        PUT        /revisions/{id}.{_format}          
+  delete_revision     DELETE     /revisions/{id}.{_format}          
+  post_page           POST       /pages.{_format}                   
+  get_page            GET        /pages/{id}.{_format}              
+  put_page            PUT        /pages/{id}.{_format}              
+  delete_page         DELETE     /pages/{id}.{_format}       
