@@ -57,6 +57,13 @@ class PageRevision implements StatusInterface
      */
     protected $updateBy;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rating", mappedBy="revision", cascade={"persist", "remove"})
+     */
+    protected $ratings;
+
     /////////////////////////
     // GETTERS AND SETTERS //
     /////////////////////////
@@ -144,6 +151,10 @@ class PageRevision implements StatusInterface
     /////////////////
     //  FUNCTIONS  //
     /////////////////
+
+    public function __construct() {
+        $this->ratings = new ArrayCollection();
+    }
 
     public function setStatusOnline() { $this->status = self::STATUS_ONLINE; }
     public function setStatusPending() { $this->status = self::STATUS_PENDING; }
