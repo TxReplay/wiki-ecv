@@ -29,6 +29,10 @@ class User extends BaseUser
      */
     protected $revisions;
 
+    /////////////////////////
+    // GETTERS AND SETTERS //
+    /////////////////////////
+
     /**
      * @return mixed
      */
