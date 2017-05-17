@@ -4,39 +4,40 @@ namespace AppBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 class ApiRatingController extends ApiBaseController
 {
+    /**
+     * @Rest\Post("/rating")
+     * @ApiDoc()
+     */
     public function postRatingAction() {}
 
     /**
-     * @param Request $request
-     * @return array|JsonResponse
+     * @Rest\Get("/rating/{rating_id}")
      * @ApiDoc()
-     * @Rest\View()
-     * @Rest\Get("/user/{user_id}")
      */
-    public function getRatingAction(Request $request) {
-        $rating = $this->getUserRepository()->find($request->get('rating_id'));
+    public function getRatingAction($rating_id) {
+        $rating = $this->getAppRepository('Rating')->find($rating_id);
 
-        dump($rating);
-        die();
-
-        if (empty($user)) {
-            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        if (empty($rating)) {
+            return new JsonResponse(['message' => 'Rating not found'], Response::HTTP_NOT_FOUND);
         }
 
-        return [
-            'id' => $user->getId(),
-            'username' => $user->getUsername(),
-            'email' => $user->getEmail()
-        ];
+        return $this->serialize($rating);
     }
 
-    public function putRatingAction($id) {}
+    /**
+     * @Rest\Put("/rating/{rating_id}")
+     * @ApiDoc()
+     */
+    public function putRatingAction($rating_id) {}
 
-    public function deleteRatingAction($id) {}
+    /**
+     * @Rest\Delete("/rating/{rating_id}")
+     * @ApiDoc()
+     */
+    public function deleteRatingAction($rating_id) {}
 }

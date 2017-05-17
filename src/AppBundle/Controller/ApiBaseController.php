@@ -12,8 +12,13 @@ class ApiBaseController extends FOSRestController
      */
     protected function getAppRepository($entity)
     {
-        return $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:'.$entity);
+        return $this->getAppManager()->getRepository('AppBundle:'.$entity);
 
+    }
+
+    protected function getAppManager()
+    {
+        return $this->get('doctrine.orm.entity_manager');
     }
 
     protected function serialize($object)

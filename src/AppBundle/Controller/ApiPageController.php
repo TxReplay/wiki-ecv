@@ -10,11 +10,35 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 class ApiPageController extends ApiBaseController
 {
+    /**
+     * @Rest\Post("/page")
+     * @ApiDoc()
+     */
     public function postPageAction() {}
 
-    public function getPageAction($page_id) {}
+    /**
+     * @Rest\Get("/page/{page_id}")
+     * @ApiDoc()
+     */
+    public function getPageAction($page_id) {
+        $page = $this->getAppRepository('Page')->find($page_id);
 
+        if (empty($page)) {
+            return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->serialize($page);
+    }
+
+    /**
+     * @Rest\Put("/page/{page_id}")
+     * @ApiDoc()
+     */
     public function putPageAction($page_id) {}
 
+    /**
+     * @Rest\Delete("/page/{page_id}")
+     * @ApiDoc()
+     */
     public function deletePageAction($page_id) {}
 }

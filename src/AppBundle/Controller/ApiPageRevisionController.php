@@ -10,11 +10,36 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 class ApiPageRevisionController extends ApiBaseController
 {
+    /**"
+     * @Rest\Post("/revision")
+     * @ApiDoc()
+     */
     public function postRevisionAction() {}
 
-    public function getRevisionAction($id) {}
+    /**"
+     * @Rest\Get("/revision/{revision_id}")
+     * @ApiDoc()
+     */
+    public function getRevisionAction($revision_id)
+    {
+        $revision = $this->getAppRepository('PageRevision')->find($revision_id);
 
-    public function putRevisionAction($id) {}
+        if (empty($revision)) {
+            return new JsonResponse(['message' => 'Revision not found'], Response::HTTP_NOT_FOUND);
+        }
 
-    public function deleteRevisionAction($id) {}
+        return $this->serialize($revision);
+    }
+
+    /**"
+     * @Rest\Put("/revision/{revision_id}")
+     * @ApiDoc()
+     */
+    public function putRevisionAction($revision_id) {}
+
+    /**"
+     * @Rest\Delete("/revision/{revision_id}")
+     * @ApiDoc()
+     */
+    public function deleteRevisionAction($revision_id) {}
 }

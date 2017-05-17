@@ -9,9 +9,8 @@ pages:
 
 revisions:
     type: rest
-    parent: pages
     resource: AppBundle\Controller\ApiPageRevisionController
 
 ratings:
     type: rest
-    resource: AppBundle\Controller\ApiPageController
+    resource: AppBundle\Controller\ApiRatingController
