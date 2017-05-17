@@ -2,18 +2,44 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
+use FOS\UserBundle\Form\Type\RegistrationFormType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 class ApiUserController extends ApiBaseController
 {
     /**
-     * @Rest\Post("/user")
+     * @Rest\Post("/user/register")
      * @ApiDoc()
      */
-    public function postUserAction() {}
+    public function postUserAction(Request $request)
+    {
+        $data = $request->request->all();
+
+        $userManager = $this->get('fos_user.user_manager');
+
+        if ($userManager->findUserByEmail($data['email'])) {
+            return new JsonResponse(['message' => 'Email already used'], Response::HTTP_CONFLICT);
+        }
+
+        if ($userManager->findUserByUsername($data['username'])) {
+            return new JsonResponse(['message' => 'Username already used'], Response::HTTP_CONFLICT);
+        }
+
+        $user = $userManager->createUser();
+        $user->setUsername($data['username']);
+        $user->setEmail($data['email']);
+        $user->setPlainPassword($data['password']);
+        $user->setEnabled(true);
+
+        $userManager->updateUser($user);
+
+        return [];
+    }
 
     /**
      * @Rest\Get("/user/{user_id}")
