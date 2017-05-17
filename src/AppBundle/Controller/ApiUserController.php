@@ -19,17 +19,7 @@ class ApiUserController extends FOSRestController
     /**
      * @param Request $request
      * @return array|JsonResponse
-     * @ApiDoc(
-     *  description="Returns an user",
-     *  requirements={
-     *      {
-     *          "name"="user_id",
-     *          "dataType"="integer",
-     *          "requirement"="\d+",
-     *          "description"="User ID"
-     *      }
-     *  }
-     * )
+     * @ApiDoc()
      * @Rest\View()
      * @Rest\Get("/user/{user_id}")
      */
@@ -41,11 +31,7 @@ class ApiUserController extends FOSRestController
             return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
 
-        return [
-            'id' => $user->getId(),
-            'username' => $user->getUsername(),
-            'email' => $user->getEmail()
-        ];
+        return $user;
     }
 
     public function putUserAction($id) {}

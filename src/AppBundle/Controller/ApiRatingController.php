@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,29 @@ class ApiRatingController extends FOSRestController
 {
     public function postRatingAction() {}
 
-    public function getRatingAction($id) {}
+    /**
+     * @param Request $request
+     * @return array|JsonResponse
+     * @ApiDoc()
+     * @Rest\View()
+     * @Rest\Get("/user/{user_id}")
+     */
+    public function getRatingAction(Request $request) {
+        $rating = $this->getUserRepository()->find($request->get('rating_id'));
+
+        dump($rating);
+        die();
+
+        if (empty($user)) {
+            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        return [
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail()
+        ];
+    }
 
     public function putRatingAction($id) {}
 

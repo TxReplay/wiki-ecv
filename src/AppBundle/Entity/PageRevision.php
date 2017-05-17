@@ -30,7 +30,7 @@ class PageRevision implements StatusInterface
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Page", inversedBy="page", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Page", inversedBy="revisions", cascade={"persist"})
      */
     protected $page;
 
@@ -51,7 +51,8 @@ class PageRevision implements StatusInterface
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="updatedBy", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="revisions", cascade={"persist"})
+     * @ORM\JoinColumn(name="update_by_user_id", referencedColumnName="id")
      */
     protected $updateBy;
 
