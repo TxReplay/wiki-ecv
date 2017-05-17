@@ -12,13 +12,19 @@ class ApiPageController extends ApiBaseController
 {
     /**
      * @Rest\Post("/page")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Create a new page"
+     * )
      */
     public function postPageAction() {}
 
     /**
      * @Rest\Get("/page/{page_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Get a page by his id"
+     * )
      */
     public function getPageAction($page_id) {
         $page = $this->getAppRepository('Page')->find($page_id);
@@ -32,13 +38,19 @@ class ApiPageController extends ApiBaseController
 
     /**
      * @Rest\Put("/page/{page_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Update a page by his id"
+     * )
      */
     public function putPageAction($page_id) {}
 
     /**
      * @Rest\Delete("/page/{page_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Delete a page by his id"
+     * )
      */
     public function deletePageAction($page_id) {}
 }

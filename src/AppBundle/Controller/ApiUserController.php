@@ -14,7 +14,19 @@ class ApiUserController extends ApiBaseController
 {
     /**
      * @Rest\Post("/user/register")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="User",
+     *     description="Register a new user.",
+     *     requirements={
+     *          { "name"="email", "dataType"="string" },
+     *          { "name"="username", "dataType"="string" },
+     *          { "name"="password", "dataType"="string" }
+     *     },
+     *     statusCodes={
+     *         200 = "Returned when successful",
+     *         409 = "Returned when the email/username is already used",
+     *     }
+     * )
      */
     public function postUserAction(Request $request)
     {
@@ -43,7 +55,17 @@ class ApiUserController extends ApiBaseController
 
     /**
      * @Rest\Get("/user/{user_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="User",
+     *     description="Retrieve an user by his id",
+     *     parameters={
+     *          {"name"="user_id", "dataType"="integer", "required"=true, "description"="User id"}
+     *     },
+     *     statusCodes={
+     *         200 = "Returned when successful",
+     *         409 = "Returned when the email/username is already used",
+     *     }
+     * )
      */
     public function getUserAction($user_id)
     {
@@ -58,13 +80,19 @@ class ApiUserController extends ApiBaseController
 
     /**
      * @Rest\Put("user/{user_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="User",
+     *     description="Update an user by his id"
+     * )
      */
     public function putUserAction($user_id) {}
 
     /**
      * @Rest\Delete("user/{user_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="User",
+     *     description="Delete an user by his id"
+     * )
      */
     public function deleteUserAction($user_id) {
         $user = $this->getAppRepository('User')->find($user_id);
@@ -84,13 +112,19 @@ class ApiUserController extends ApiBaseController
 
     /**
      * @Rest\Post("/user/login")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="User",
+     *     description="Login an user"
+     * )
      */
     public function postUserLoginAction() {}
 
     /**
      * @Rest\Get("/user/logout")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="User",
+     *     description="Logout an user by his id"
+     * )
      */
     public function getUserLogoutAction() {}
 }

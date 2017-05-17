@@ -10,15 +10,21 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 class ApiPageRevisionController extends ApiBaseController
 {
-    /**"
+    /**
      * @Rest\Post("/revision")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Create a new revision"
+     * )
      */
     public function postRevisionAction() {}
 
-    /**"
+    /**
      * @Rest\Get("/revision/{revision_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Get a revision by his id"
+     * )
      */
     public function getRevisionAction($revision_id)
     {
@@ -31,15 +37,21 @@ class ApiPageRevisionController extends ApiBaseController
         return $this->serialize($revision);
     }
 
-    /**"
+    /**
      * @Rest\Put("/revision/{revision_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Update a revision by his id"
+     * )
      */
     public function putRevisionAction($revision_id) {}
 
-    /**"
+    /**
      * @Rest\Delete("/revision/{revision_id}")
-     * @ApiDoc()
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Delete a revision by his id"
+     * )
      */
     public function deleteRevisionAction($revision_id) {}
 }
