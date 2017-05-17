@@ -31,6 +31,7 @@ class PageRevision implements StatusInterface
      * @var Page
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Page", inversedBy="revisions", cascade={"persist"})
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
      */
     protected $page;
 
@@ -124,6 +125,21 @@ class PageRevision implements StatusInterface
         $this->page = $page;
     }
 
+    /**
+     * @return User
+     */
+    public function getUpdateBy()
+    {
+        return $this->updateBy;
+    }
+
+    /**
+     * @param User $updateBy
+     */
+    public function setUpdateBy($updateBy)
+    {
+        $this->updateBy = $updateBy;
+    }
 
     /////////////////
     //  FUNCTIONS  //
