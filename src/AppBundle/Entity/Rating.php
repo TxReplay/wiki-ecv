@@ -30,14 +30,14 @@ class Rating implements StatusInterface
     /**
      * @var PageRevision
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PageRevision", inversedBy="revision", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PageRevision", inversedBy="page", cascade={"persist"})
      */
     protected $page;
 
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="user", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="id", cascade={"persist"})
      */
     protected $user;
 
