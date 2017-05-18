@@ -25,6 +25,7 @@
     "tether": "^1.4.0",
     "reset-css": "^2.2.0",
     "angular": "^1.6.4",
-    "angular-route": "^1.6.4"
+    "angular-route": "^1.6.4",
+    "angular-sanitize": "^1.6.4"
   }
 }
