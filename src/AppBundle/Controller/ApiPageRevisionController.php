@@ -2,31 +2,56 @@
 
 namespace AppBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\ViewHandler;
-use FOS\RestBundle\View\View;
 
-class ApiPageRevisionController extends FOSRestController
+class ApiPageRevisionController extends ApiBaseController
 {
+    /**
+     * @Rest\Post("/revision")
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Create a new revision"
+     * )
+     */
     public function postRevisionAction() {}
 
-    public function getRevisionAction($id) {}
+    /**
+     * @Rest\Get("/revision/{revision_id}")
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Get a revision by his id"
+     * )
+     */
+    public function getRevisionAction($revision_id)
+    {
+        $revision = $this->getAppRepository('PageRevision')->find($revision_id);
 
-    public function putRevisionAction($id) {}
+        if (empty($revision)) {
+            return new JsonResponse(['message' => 'Revision not found'], Response::HTTP_NOT_FOUND);
+        }
 
-    public function deleteRevisionAction($id) {}
+        return $this->serialize($revision);
+    }
 
     /**
-     * @return \AppBundle\Repository\PageRevisionRepository|\Doctrine\ORM\EntityRepository
+     * @Rest\Put("/revision/{revision_id}")
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Update a revision by his id"
+     * )
      */
-    private function getUserRepository()
-    {
-        return $this->get('doctrine.orm.entity_manager')->getRepository('AppBundle:PageRevision');
+    public function putRevisionAction($revision_id) {}
 
-    }
+    /**
+     * @Rest\Delete("/revision/{revision_id}")
+     * @ApiDoc(
+     *     section="Revision",
+     *     description="Delete a revision by his id"
+     * )
+     */
+    public function deleteRevisionAction($revision_id) {}
 }

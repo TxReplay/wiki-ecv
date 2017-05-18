@@ -25,9 +25,13 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PageRevision", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PageRevision", mappedBy="updateBy", cascade={"persist", "remove"})
      */
     protected $revisions;
+
+    /////////////////////////
+    // GETTERS AND SETTERS //
+    /////////////////////////
 
     /**
      * @return mixed

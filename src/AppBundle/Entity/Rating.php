@@ -28,16 +28,18 @@ class Rating implements StatusInterface
     private $id;
 
     /**
-     * @var PageRevision
+     * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PageRevision", inversedBy="revision", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PageRevision",cascade={"persist"})
+     * @ORM\JoinColumn(name="revision_id", referencedColumnName="id")
      */
-    protected $page;
+    protected $revision;
 
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="user", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
 
@@ -120,7 +122,6 @@ class Rating implements StatusInterface
     /////////////////
     //  FUNCTIONS  //
     /////////////////
-
 
 }
 

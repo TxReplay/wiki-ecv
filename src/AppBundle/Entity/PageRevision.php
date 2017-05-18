@@ -30,7 +30,8 @@ class PageRevision implements StatusInterface
     /**
      * @var Page
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Page", inversedBy="page", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Page", inversedBy="revisions", cascade={"persist"})
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
      */
     protected $page;
 
@@ -51,9 +52,17 @@ class PageRevision implements StatusInterface
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="updatedBy", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="revisions", cascade={"persist"})
+     * @ORM\JoinColumn(name="update_by_user_id", referencedColumnName="id")
      */
     protected $updateBy;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rating", mappedBy="revision", cascade={"persist", "remove"})
+     */
+    protected $ratings;
 
     /////////////////////////
     // GETTERS AND SETTERS //
@@ -123,10 +132,29 @@ class PageRevision implements StatusInterface
         $this->page = $page;
     }
 
+    /**
+     * @return User
+     */
+    public function getUpdateBy()
+    {
+        return $this->updateBy;
+    }
+
+    /**
+     * @param User $updateBy
+     */
+    public function setUpdateBy($updateBy)
+    {
+        $this->updateBy = $updateBy;
+    }
 
     /////////////////
     //  FUNCTIONS  //
     /////////////////
+
+    public function __construct() {
+        $this->ratings = new ArrayCollection();
+    }
 
     public function setStatusOnline() { $this->status = self::STATUS_ONLINE; }
     public function setStatusPending() { $this->status = self::STATUS_PENDING; }
