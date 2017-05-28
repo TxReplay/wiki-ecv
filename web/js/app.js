@@ -3,7 +3,7 @@ var app = angular.module("WikiApp", ["ngRoute"]);
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.
     when('/', {
-        templateUrl: 'templates/index.html',
+        templateUrl: '/templates/index.html',
         controller: "FrontController",
         controllerAs: 'ctrl',
         title: 'homepage'
@@ -20,22 +20,20 @@ app.run(['$rootScope', '$route', function($rootScope, $route) {
 app.directive('header', ['$http', function($http){
     return {
         restrict: 'EA',
-        templateUrl: 'templates/bases/header.html'
+        templateUrl: '/templates/bases/header.html'
     }
 }]);
 
 app.directive('footer', ['$http', function($http){
     return {
         restrict: 'EA',
-        templateUrl: 'templates/bases/footer.html'
+        templateUrl: '/templates/bases/footer.html'
     }
 }]);
-
-
 
 app.directive('titre', ['$http', function($http){
     return {
         restrict: 'EA',
-        templateUrl: 'templates/bases/title.html'
+        templateUrl: '/templates/bases/title.html'
     }
 }]);
