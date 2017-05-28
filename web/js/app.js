@@ -7,6 +7,42 @@ app.config(['$routeProvider', function($routeProvider){
         controller: "FrontController",
         controllerAs: 'ctrl',
         title: 'homepage'
+    }).
+    when('/search', {
+        templateUrl: 'templates/index.html',
+        controller: "SearchController",
+        controllerAs: 'ctrl',
+        title: 'Recherche'
+    }).
+    when('/page/new', {
+        templateUrl: 'templates/index.html',
+        controller: "NewController",
+        controllerAs: 'ctrl',
+        title: 'Nouvel page'
+    }).
+    when('/page/:slug', {
+        templateUrl: 'templates/index.html',
+        controller: "PageController",
+        controllerAs: 'ctrl',
+        title: 'Page précise'
+    }).
+    when('/page/:slug/edit', {
+        templateUrl: 'templates/index.html',
+        controller: "EditController",
+        controllerAs: 'ctrl',
+        title: 'Modifié page'
+    }).
+    when('/page/:slug/history', {
+        templateUrl: 'templates/index.html',
+        controller: "HistoryController",
+        controllerAs: 'ctrl',
+        title: 'Historique page'
+    }).
+    when('/inscription', {
+        templateUrl: 'templates/index.html',
+        controller: "InscriptionController",
+        controllerAs: 'ctrl',
+        title: 'Inscription'
     })
 }]);
 
