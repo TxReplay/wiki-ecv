@@ -26,6 +26,7 @@
     "reset-css": "^2.2.0",
     "angular": "^1.6.4",
     "angular-route": "^1.6.4",
-    "angular-sanitize": "^1.6.4"
+    "angular-sanitize": "^1.6.4",
+    "angular-resource": "^1.6.4"
   }
 }

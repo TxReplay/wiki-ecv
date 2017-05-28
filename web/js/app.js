@@ -1,4 +1,4 @@
-var app = angular.module("WikiApp", ["ngRoute"]);
+var app = angular.module("WikiApp", ["ngRoute", "ngResource"]);
 
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.
@@ -53,6 +53,8 @@ app.run(['$rootScope', '$route', function($rootScope, $route) {
     });
 }]);
 
+// DIRECTIVE
+
 app.directive('header', ['$http', function($http){
     return {
         restrict: 'EA',
@@ -73,3 +75,5 @@ app.directive('titre', ['$http', function($http){
         templateUrl: '/templates/bases/title.html'
     }
 }]);
+
+// END DIRECTIVE
