@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Page;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,17 +18,27 @@ class ApiPageController extends ApiBaseController
      *     description="Create a new page"
      * )
      */
-    public function postPageAction() {}
+    public function postPageAction(Request $request) {
+        $data = $request->request->all();
+
+        $page = new Page();
+        $page->setTitle($data['title']);
+
+        $this->getAppManager()->persist($page);
+        $this->getAppManager()->flush();
+
+        return new JsonResponse(['message' => 'Page successfully created'], Response::HTTP_ACCEPTED);
+    }
 
     /**
-     * @Rest\Get("/page/{page_id}")
+     * @Rest\Get("/page/{page_slug}")
      * @ApiDoc(
      *     section="Page",
-     *     description="Get a page by his id"
+     *     description="Get a page by his slug"
      * )
      */
-    public function getPageAction($page_id) {
-        $page = $this->getAppRepository('Page')->find($page_id);
+    public function getPageAction($page_slug) {
+        $page = $this->getAppRepository('Page')->findOneBy(['slug' => $page_slug]);
 
         if (empty($page)) {
             return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
@@ -37,20 +48,31 @@ class ApiPageController extends ApiBaseController
     }
 
     /**
-     * @Rest\Put("/page/{page_id}")
+     * @Rest\Put("/page/{page_slug}")
      * @ApiDoc(
      *     section="Page",
-     *     description="Update a page by his id"
+     *     description="Update a page by his slug"
      * )
      */
-    public function putPageAction($page_id) {}
+    public function putPageAction($page_slug) {}
 
     /**
-     * @Rest\Delete("/page/{page_id}")
+     * @Rest\Delete("/page/{page_slug}")
      * @ApiDoc(
      *     section="Page",
-     *     description="Delete a page by his id"
+     *     description="Delete a page by his slug"
      * )
      */
-    public function deletePageAction($page_id) {}
+    public function deletePageAction($page_slug) {
+        $page = $this->getAppRepository('Page')->findOneBySlug($page_slug);
+
+        if (empty($page)) {
+            return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $this->getAppManager()->remove($page);
+        $this->getAppManager()->flush();
+
+        return new JsonResponse(['message' => 'Page successfully deleted.'], Response::HTTP_ACCEPTED);
+    }
 }
