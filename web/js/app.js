@@ -15,7 +15,7 @@ app.config(['$routeProvider', function($routeProvider){
         title: 'Recherche'
     }).
     when('/page/new', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/page/new_page.html',
         controller: "NewController",
         controllerAs: 'ctrl',
         title: 'Nouvel page'
