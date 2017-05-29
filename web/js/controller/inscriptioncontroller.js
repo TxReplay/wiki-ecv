@@ -1,7 +1,12 @@
 app.controller('InscriptionController',
-    ['$scope', '$http', '$location',
-        function($scope, $http, $location){
+    ['$scope', '$http', '$location', 'user',
+        function($scope, $http, $location, user){
             var ctrl= this;
+
+            $scope.user = user;
+            // and then set values on the object
+            $scope.user.firstname = "John";
+            $scope.user.secondname = "Smith";
 
             ctrl.username = "";
             ctrl.mail = "";
@@ -16,6 +21,9 @@ app.controller('InscriptionController',
                 ctrl.nopass = 0;
                 ctrl.wrongpass = 0;
                 ctrl.error = 0;
+
+                ctrl.user = 'Test';
+                ctrl.error = 1;
 
                 // Check erreur
                 if(!username || username === ''){

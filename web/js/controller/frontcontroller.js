@@ -1,7 +1,8 @@
 app.controller('FrontController',
-    ['$scope', '$http',
-        function($scope, $http){
-            // yolo
+    ['$scope', '$http', 'user',
+        function($scope, $http, user){
+            $scope.user = user;
+            console.log($scope);
         }
     ]
 );

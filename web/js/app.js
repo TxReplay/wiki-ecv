@@ -77,3 +77,7 @@ app.directive('titre', ['$http', function($http){
 }]);
 
 // END DIRECTIVE
+
+app.factory("user",function(){
+    return {};
+});
