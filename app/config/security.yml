@@ -29,4 +29,4 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/api/v1/user/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/, role: ROLE_ADMIN }
+#        - { path: ^/api/, role: ROLE_ADMIN }
