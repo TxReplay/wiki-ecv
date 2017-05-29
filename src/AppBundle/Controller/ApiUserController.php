@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class ApiUserController extends ApiBaseController
 {
@@ -31,7 +33,6 @@ class ApiUserController extends ApiBaseController
     public function postUserAction(Request $request)
     {
         $data = $request->request->all();
-
         $userManager = $this->get('fos_user.user_manager');
 
         if ($userManager->findUserByEmail($data['email'])) {
@@ -50,7 +51,7 @@ class ApiUserController extends ApiBaseController
 
         $userManager->updateUser($user);
 
-        return [];
+        return new JsonResponse(['message' => 'User successfully created'], Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -117,7 +118,29 @@ class ApiUserController extends ApiBaseController
      *     description="Login an user"
      * )
      */
-    public function postUserLoginAction() {}
+    public function postUserLoginAction(Request $request) {
+        $data = $request->request->all();
+        $userManager = $this->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByEmail($data['email']);
+
+        if (!$user) {
+            return new JsonResponse(['message' => 'Email does not exist'], Response::HTTP_CONFLICT);
+        }
+
+        if (!$this->get('security.password_encoder')->isPasswordValid($user, $data['password'])) {
+            return new JsonResponse(['message' => 'no match'], Response::HTTP_CONFLICT);
+        }
+
+        $user_pwd_token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
+
+        $context = $this->get('security.token_storage');
+        $context->setToken($user_pwd_token);
+        $token = $context->getToken();
+        $user = $token->getUser();
+
+        return $this->serialize($user);
+    }
 
     /**
      * @Rest\Get("/user/logout")
@@ -126,5 +149,5 @@ class ApiUserController extends ApiBaseController
      *     description="Logout an user by his id"
      * )
      */
-    public function getUserLogoutAction() {}
+    public function getUserLogoutAction(Request $request) {}
 }
