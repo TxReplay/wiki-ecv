@@ -27,7 +27,7 @@ class ApiPageController extends ApiBaseController
         $this->getAppManager()->persist($page);
         $this->getAppManager()->flush();
 
-        return new JsonResponse(['message' => 'Page successfully created'], Response::HTTP_ACCEPTED);
+        return new JsonResponse(['slug_page' => $page->getSlug()], Response::HTTP_ACCEPTED);
     }
 
     /**

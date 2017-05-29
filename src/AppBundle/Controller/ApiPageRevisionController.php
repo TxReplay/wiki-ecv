@@ -23,8 +23,7 @@ class ApiPageRevisionController extends ApiBaseController
         $data = $request->request->all();
         $page = $this->getAppRepository('Page')->findOneBy(['slug' => $page_slug]);
 
-        //TODO: Get a real user
-        $user = $this->getAppRepository('User')->find(1);
+        $user = $this->getAppRepository('User')->find($data['id_user']);
 
         $revision = new PageRevision();
         $revision->setPage($page);

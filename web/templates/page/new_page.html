@@ -2,16 +2,19 @@
     <div class="row">
         <div class="col-md-4">
             <h2>Création d'une nouvelle page</h2>
+            <span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
             <form>
                 <div class="form-group">
                     <label for="page_title">Titre de la page</label>
-                    <input type="text" class="form-control" id="page_title" placeholder="Titre de la page">
+                    <input type="text" ng-model="ctrl.titre" class="form-control" id="page_title" placeholder="Titre de la page">
+                    <span ng-show="ctrl.notitre">Merci d'indiquer un titre</span>
                 </div>
                 <div class="form-group">
                     <label for="page_content">Contenu de la page</label>
-                    <textarea class="form-control" id="page_content"></textarea>
+                    <textarea ng-model="ctrl.contenu" class="form-control" id="page_content"></textarea>
+                    <span ng-show="ctrl.nocontenu">Merci de renseigner du contenu</span>
                 </div>
-                <button type="submit" class="btn btn-primary">Créer</button>
+                <button ng-click="ctrl.addPage(ctrl.titre, ctrl.contenu)" type="submit" class="btn btn-primary">Créer</button>
             </form>
         </div>
     </div>
