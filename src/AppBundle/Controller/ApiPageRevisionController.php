@@ -72,5 +72,21 @@ class ApiPageRevisionController extends ApiBaseController
      *     description="Delete a revision by his id"
      * )
      */
-    public function deleteRevisionAction($revision_id) {}
+    public function deleteRevisionAction($page_slug, $revision_id) {
+        $page = $this->getAppRepository('Page')->findOneBySlug($page_slug);
+        $revision = $this->getAppRepository('PageRevision')->findOneBy(['page' => $page, 'id' => $revision_id]);
+
+        if (empty($page)) {
+            return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        if (empty($revision)) {
+            return new JsonResponse(['message' => 'Revision not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $this->getAppManager()->remove($revision);
+        $this->getAppManager()->flush();
+
+        return new JsonResponse(['message' => 'Revision successfully deleted.'], Response::HTTP_ACCEPTED);
+    }
 }

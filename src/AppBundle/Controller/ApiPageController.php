@@ -63,5 +63,16 @@ class ApiPageController extends ApiBaseController
      *     description="Delete a page by his slug"
      * )
      */
-    public function deletePageAction($page_slug) {}
+    public function deletePageAction($page_slug) {
+        $page = $this->getAppRepository('Page')->findOneBySlug($page_slug);
+
+        if (empty($page)) {
+            return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $this->getAppManager()->remove($page);
+        $this->getAppManager()->flush();
+
+        return new JsonResponse(['message' => 'Page successfully deleted.'], Response::HTTP_ACCEPTED);
+    }
 }
