@@ -4,23 +4,25 @@ app.controller('PageController',
             var ctrl= this;
             ctrl.slug = $routeParams.slug;
 
-            $http.get('/api/v1/page/1').then(
+            $http.get('/api/v1/page/'+ctrl.slug).then(
                 function(success){
-                    console.log(success.data);
+                    console.log(success);
                 },
                 function(error){
                     console.log(error);
                 }
             );
 
-            $http({
-                method: 'GET',
-                url: '/api/v1/page/1'
-            }).then(function successCallback(response) {
-                console.log(response);
-            }, function errorCallback(response) {
-                console.log(response);
-            });
+            /*var myObj = {"title":"TEST2"};
+            var myJSON = JSON.stringify(myObj);
+
+            $http.post('/api/v1/page', myJSON).then(
+                function(response){
+                    console.log(response);
+                }, function(response){
+                    console.log(response);
+                }
+            );*/
         }
     ]
 );

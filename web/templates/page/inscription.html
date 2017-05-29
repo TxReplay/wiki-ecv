@@ -1,0 +1,10 @@
+<span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
+<input type="text" ng-model="ctrl.username" placeholder="Username">
+<span ng-show="ctrl.nousername">Merci de renseigner un username</span>
+<input type="text" ng-model="ctrl.mail" placeholder="email">
+<span ng-show="ctrl.wrongmail">L'email n'ai pas au bon format</span>
+<input type="password" ng-model="ctrl.password" placeholder="mdp">
+<input type="password" ng-model="ctrl.repeat" placeholder="répété">
+<span ng-show="ctrl.nopass">Merci de renseigner un mot de passe</span>
+<span ng-show="ctrl.wrongpass">Les mots de passe ne sont pas identique</span>
+<button ng-click="ctrl.inscription(ctrl.username, ctrl.mail, ctrl.password, ctrl.repeat)">inscription</button>

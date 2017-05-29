@@ -39,7 +39,7 @@ app.config(['$routeProvider', function($routeProvider){
         title: 'Historique page'
     }).
     when('/inscription', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/page/inscription.html',
         controller: "InscriptionController",
         controllerAs: 'ctrl',
         title: 'Inscription'
