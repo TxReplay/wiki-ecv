@@ -51,7 +51,7 @@ class ApiUserController extends ApiBaseController
 
         $userManager->updateUser($user);
 
-        return [];
+        return new JsonResponse(['message' => 'User successfully created'], Response::HTTP_ACCEPTED);
     }
 
     /**
