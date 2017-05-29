@@ -1,2 +1,7 @@
 nav {
-  margin-bottom: 15px; }
+  margin-bottom: 20px; }
+  nav .login_form {
+    margin-right: 10px; }
+
+p {
+  margin-bottom: 5px; }
