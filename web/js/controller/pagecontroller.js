@@ -4,7 +4,7 @@ app.controller('PageController',
             var ctrl= this;
             ctrl.slug = $routeParams.slug;
 
-            $http.get('/api/v1/page/'+ctrl.slug).then(
+            $http.get('/api/v1/page/1').then(
                 function(success){
                     console.log(success.data);
                 },
@@ -12,6 +12,15 @@ app.controller('PageController',
                     console.log(error);
                 }
             );
+
+            $http({
+                method: 'GET',
+                url: '/api/v1/page/1'
+            }).then(function successCallback(response) {
+                console.log(response);
+            }, function errorCallback(response) {
+                console.log(response);
+            });
         }
     ]
 );
