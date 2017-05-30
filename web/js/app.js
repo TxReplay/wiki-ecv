@@ -21,7 +21,7 @@ app.config(['$routeProvider', function($routeProvider){
         title: 'Nouvel page'
     }).
     when('/page/:slug', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/page/page.html',
         controller: "PageController",
         controllerAs: 'ctrl',
         title: 'Page précise'
@@ -55,10 +55,16 @@ app.run(['$rootScope', '$route', function($rootScope, $route) {
 
 // DIRECTIVE
 
-app.directive('header', ['$http', function($http){
+app.directive('header', ['$http', '$window', function($http, $window){
     return {
         restrict: 'EA',
-        templateUrl: '/templates/bases/header.html'
+        scope: {
+            myVar: '=myVar'
+        },
+        templateUrl: '/templates/bases/header.html',
+        link: function($scope, element, attrs) {
+            console.log($scope.myVar)
+        }
     }
 }]);
 

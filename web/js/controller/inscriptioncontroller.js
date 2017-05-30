@@ -4,6 +4,7 @@ app.controller('InscriptionController',
             var ctrl = this;
 
             $scope.user = user;
+            $scope.user.id = 1;
 
             ctrl.username = "";
             ctrl.mail = "";

@@ -1,28 +1,21 @@
 app.controller('PageController',
-    ['$scope', '$http', '$routeParams',
-        function($scope, $http, $routeParams){
+    ['$scope', '$http', '$routeParams', 'user',
+        function($scope, $http, $routeParams, user){
             var ctrl= this;
             ctrl.slug = $routeParams.slug;
 
+            $scope.user = user;
+            console.log($scope.user);
+
             $http.get('/api/v1/page/'+ctrl.slug).then(
                 function(success){
-                    console.log(success);
+                    ctrl.title = success.data.title;
+                    ctrl.last_revision = success.data.revisions[success.data.revisions.length - 1];
                 },
                 function(error){
                     console.log(error);
                 }
             );
-
-            /*var myObj = {"title":"TEST2"};
-            var myJSON = JSON.stringify(myObj);
-
-            $http.post('/api/v1/page', myJSON).then(
-                function(response){
-                    console.log(response);
-                }, function(response){
-                    console.log(response);
-                }
-            );*/
         }
     ]
 );
