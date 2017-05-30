@@ -11,12 +11,14 @@ app.controller('EditController',
 
             ctrl.title = "";
             ctrl.content = "";
+            ctrl.status = "";
 
             $http.get('/api/v1/page/'+ctrl.slug).then(
                 function(success){
                     ctrl.title = success.data.title;
                     ctrl.id = success.data.id;
                     ctrl.last_revision = success.data.revisions[success.data.revisions.length - 1];
+                    ctrl.status = ctrl.last_revision.status;
                     ctrl.content = ctrl.last_revision.content;
                     ctrl.save = ctrl.last_revision.content;
                 },
@@ -25,11 +27,12 @@ app.controller('EditController',
                 }
             );
 
-            ctrl.modification = function(content){
+            ctrl.modification = function(content, status){
                 // Init erreur
                 ctrl.error = 0;
                 ctrl.empty = 0;
                 ctrl.nochange = 0;
+                ctrl.nostatus = 0;
 
                 // Check erreur
                 if(content === ''){
@@ -38,6 +41,10 @@ app.controller('EditController',
                 }
                 if(content === ctrl.save){
                     ctrl.nochange = 1;
+                    ctrl.error = 1;
+                }
+                if(status === ''){
+                    ctrl.nostatus = 1;
                     ctrl.error = 1;
                 }
 
@@ -50,7 +57,7 @@ app.controller('EditController',
 
                     $http.post('/api/v1/page/'+ctrl.slug+'/revision', myJSON).then(
                         function(success){
-                            $location.path('/');
+                            $location.path('/page/'+ctrl.slug);
                         }, function(error){
                             console.log(error);
                             ctrl.showerror = 1;

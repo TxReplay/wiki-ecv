@@ -4,4 +4,12 @@
 <textarea ng-model="ctrl.content" placeholder="contenu de la page"></textarea>
 <span ng-show="ctrl.empty">Merci de ne pas laisser le contenu vide</span>
 <span ng-show="ctrl.nochange">Merci de modifier le contenu</span>
-<button ng-click="ctrl.modification(ctrl.content)">Modifier</button>
+Status :
+<select ng-model="ctrl.status">
+    <option value="online">Online</option>
+    <option value="pending_validation">En attente de validation</option>
+    <option value="canceled">Annulé</option>
+    <option value="draft">Brouillon</option>
+</select>
+<span ng-show="ctrl.nostatus">Merci d'indiquer un status</span>
+<button ng-click="ctrl.modification(ctrl.content, ctrl.status)">Modifier</button>
