@@ -12,12 +12,14 @@ app.controller('NewController',
             ctrl.titre = "";
             ctrl.contenu = "";
             ctrl.id_user = $scope.user.id;
+            ctrl.status = "";
 
-            ctrl.addPage = function(titre, contenu){
+            ctrl.addPage = function(titre, contenu, status){
                 // Reset erreur
                 ctrl.error = 0;
                 ctrl.notitre = 0;
                 ctrl.nocontenu = 0;
+                ctrl.nostatus = 0;
 
                 // Check erreur
                 if(!titre || titre === ''){
@@ -26,6 +28,10 @@ app.controller('NewController',
                 }
                 if(!contenu || contenu === ''){
                     ctrl.nocontenu = 1;
+                    ctrl.error = 1;
+                }
+                if(!status || status === ''){
+                    ctrl.nostatus = 1;
                     ctrl.error = 1;
                 }
 
@@ -39,7 +45,8 @@ app.controller('NewController',
                         function(success){
                             var data = {
                                 "id_user" : ctrl.id_user,
-                                "content" : contenu
+                                "content" : contenu,
+                                "status" : status
                             };
                             var myJSON = JSON.stringify(data);
 

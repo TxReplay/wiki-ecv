@@ -14,7 +14,15 @@
                     <textarea ng-model="ctrl.contenu" class="form-control" id="page_content"></textarea>
                     <span ng-show="ctrl.nocontenu">Merci de renseigner du contenu</span>
                 </div>
-                <button ng-click="ctrl.addPage(ctrl.titre, ctrl.contenu)" type="submit" class="btn btn-primary">Créer</button>
+                Status :
+                <select ng-model="ctrl.status">
+                    <option value="online">Online</option>
+                    <option value="pending_validation">En attente de validation</option>
+                    <option value="canceled">Annulé</option>
+                    <option value="draft">Brouillon</option>
+                </select>
+                <span ng-show="ctrl.nostatus">Merci de renseigner un status</span>
+                <button ng-click="ctrl.addPage(ctrl.titre, ctrl.contenu, ctrl.status)" type="submit" class="btn btn-primary">Créer</button>
             </form>
         </div>
     </div>

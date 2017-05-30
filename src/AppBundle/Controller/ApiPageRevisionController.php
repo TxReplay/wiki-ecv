@@ -29,6 +29,7 @@ class ApiPageRevisionController extends ApiBaseController
         $revision->setPage($page);
         $revision->setContent($data['content']);
         $revision->setUpdateBy($user);
+        $revision->setStatus($data['status']);
         
         $this->getAppManager()->persist($revision);
         $this->getAppManager()->flush();
