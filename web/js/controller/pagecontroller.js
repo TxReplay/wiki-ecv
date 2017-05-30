@@ -1,6 +1,6 @@
 app.controller('PageController',
-    ['$scope', '$http', '$routeParams', 'user',
-        function($scope, $http, $routeParams, user){
+    ['$scope', '$http', '$routeParams', '$location', 'user',
+        function($scope, $http, $routeParams, $location, user){
             var ctrl= this;
             ctrl.slug = $routeParams.slug;
 
@@ -19,6 +19,19 @@ app.controller('PageController',
                     console.log(error);
                 }
             );
+
+            ctrl.removePage = function(){
+                if(ctrl.user){ // Vérification si la personne est connecté
+                    $http.delete('/api/v1/page/'+ctrl.slug).then(
+                        function(success){
+                            $location.path('/');
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    )
+                }
+            }
         }
     ]
 );

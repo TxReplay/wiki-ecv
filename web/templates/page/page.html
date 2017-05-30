@@ -3,3 +3,4 @@
 <div class="contenu">{{ ctrl.last_revision.content }}</div>
 <div class="author">Last edited by {{ ctrl.last_revision.update_by.username }}</div>
 <a ng-show="ctrl.user" href="#!/page/{{ ctrl.slug }}/edit">Modifier la page</a>
+<a ng-show="ctrl.user" ng-click="ctrl.removePage()">Supprimer la page</a>
