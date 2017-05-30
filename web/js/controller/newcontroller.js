@@ -43,7 +43,6 @@ app.controller('NewController',
                             };
                             var myJSON = JSON.stringify(data);
 
-                            console.log('/api/v1/page/'+success.data.slug_page+'/revision');
                             var save_slug = success.data.slug_page;
                             $http.post('/api/v1/page/'+success.data.slug_page+'/revision', myJSON).then(
                                 function(success){

@@ -1,0 +1,7 @@
+<h1>Modification de </h1>
+<h2>{{ ctrl.title }}</h2>
+<span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
+<textarea ng-model="ctrl.content" placeholder="contenu de la page"></textarea>
+<span ng-show="ctrl.empty">Merci de ne pas laisser le contenu vide</span>
+<span ng-show="ctrl.nochange">Merci de modifier le contenu</span>
+<button ng-click="ctrl.modification(ctrl.content)">Modifier</button>

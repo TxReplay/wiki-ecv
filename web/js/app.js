@@ -27,7 +27,7 @@ app.config(['$routeProvider', function($routeProvider){
         title: 'Page précise'
     }).
     when('/page/:slug/edit', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/page/edit.html',
         controller: "EditController",
         controllerAs: 'ctrl',
         title: 'Modifié page'

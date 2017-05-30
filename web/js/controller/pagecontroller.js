@@ -5,7 +5,6 @@ app.controller('PageController',
             ctrl.slug = $routeParams.slug;
 
             $scope.user = user;
-            console.log($scope.user);
 
             $http.get('/api/v1/page/'+ctrl.slug).then(
                 function(success){
