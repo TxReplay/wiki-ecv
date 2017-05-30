@@ -1,0 +1,6 @@
+<div ng-repeat="revision in ctrl.revisions">
+    Révision faite par : {{revision.update_by.username}}<br>
+    Faite le : {{revision.updated_at}}<br>
+    <a href="#!/page/{{ctrl.slug}}/history/{{revision.id}}">Voir cette révision</a>
+    <hr>
+</div>

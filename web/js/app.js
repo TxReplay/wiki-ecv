@@ -33,10 +33,16 @@ app.config(['$routeProvider', function($routeProvider){
         title: 'Modifié page'
     }).
     when('/page/:slug/history', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/page/history.html',
         controller: "HistoryController",
         controllerAs: 'ctrl',
         title: 'Historique page'
+    }).
+    when('/page/:slug/history/:id', {
+        templateUrl: 'templates/index.html',
+        controller: "RevisionController",
+        controllerAs: 'ctrl',
+        title: 'Revision page'
     }).
     when('/inscription', {
         templateUrl: 'templates/page/inscription.html',

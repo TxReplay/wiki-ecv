@@ -1,10 +1,19 @@
 app.controller('HistoryController',
-    ['$scope', '$http', '$routeParams',
-        function($scope, $http, $routeParams){
+    ['$scope', '$http', '$routeParams', 'user',
+        function($scope, $http, $routeParams, user){
             var ctrl= this;
             ctrl.slug = $routeParams.slug;
 
-            // yolo
+            $scope.user = user;
+
+            $http.get('/api/v1/page/'+ctrl.slug).then(
+                function(success){
+                    ctrl.revisions = success.data.revisions;
+                },
+                function(error){
+                    console.log(error);
+                }
+            );
         }
     ]
 );
