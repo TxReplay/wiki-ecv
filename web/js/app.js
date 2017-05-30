@@ -39,7 +39,7 @@ app.config(['$routeProvider', function($routeProvider){
         title: 'Historique page'
     }).
     when('/page/:slug/history/:id', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/page/revision.html',
         controller: "RevisionController",
         controllerAs: 'ctrl',
         title: 'Revision page'
