@@ -8,3 +8,11 @@ p {
 
 .right {
   float: right; }
+
+.logout {
+  margin: 0 10px; }
+
+.welcomeMessage {
+  display: flex;
+  align-items: center;
+  margin: 0 10px; }

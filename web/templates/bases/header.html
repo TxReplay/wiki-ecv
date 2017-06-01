@@ -20,17 +20,19 @@
             <input type="password" ng-model="ctrl.password" class="form-control mr-sm-2" placeholder="Mot de passe">
             <span ng-show="ctrl.nopass">Merci de renseigner un mot de passe</span>
             <button class="btn btn-outline-success my-2 my-sm-0" ng-click="ctrl.connexion(ctrl.mail, ctrl.password)" type="submit">Connexion</button>
-            <a href="/#!/inscription">Inscription</a>
         </form>
 
-        <div ng-show="ctrl.online" style="color: white;">
+        <button href="/#!/inscription" class="btn btn-outline-success">Inscription</button>
+
+        <div ng-show="ctrl.online" style="color: white;" class="welcomeMessage" >
             Bonjour {{ctrl.username}}
-            <a ng-click="ctrl.deconnexion()">Déconnexion</a>
         </div>
 
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
+            <input class="form-control mr-sm-2 ml-sm-2" type="text" placeholder="Rechercher">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
         </form>
+
+        <button class="btn btn-outline-success logout" ng-click="ctrl.deconnexion()">Déconnexion</button>
     </div>
 </nav>
