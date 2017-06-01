@@ -67,10 +67,69 @@ app.directive('header', ['$http', '$window', function($http, $window){
         scope: {
             myVar: '=myVar'
         },
+        link: function(scope, element, attrs) {
+
+        },
         templateUrl: '/templates/bases/header.html',
-        link: function($scope, element, attrs) {
-            console.log($scope.myVar)
-        }
+        controller: function($scope, $http, user) {
+            var ctrl = this;
+            $scope.user = user;
+            $scope.$watch(function(){return user;}, function(value, oldValue){
+                if(oldValue !== value){
+                    ctrl.id = value.id;
+                    ctrl.username = value.username;
+                    if(value.username === '' || typeof value.username === 'undefined'){
+                        ctrl.online = 0;
+                    }else{
+                        ctrl.online = 1;
+                    }
+                }
+            }, true);
+
+            ctrl.connexion = function(mail, password){
+                // Reset erreur
+                ctrl.showerror = 0;
+                ctrl.wrongmail = 0;
+                ctrl.nopass = 0;
+                ctrl.error = 0;
+
+                if(!mail.match(/[a-z0-9_\-\.]+@[a-z0-9_\-\.]+\.[a-z]+/i)) {
+                    ctrl.wrongmail = 1;
+                    ctrl.error = 1;
+                }
+
+                if(!password || password === ''){
+                    ctrl.nopass = 1;
+                    ctrl.error = 1;
+                }
+
+                if(!ctrl.error){
+                    var data = {
+                        "email" : mail,
+                        "password" : password
+                    };
+                    var myJSON = JSON.stringify(data);
+
+                    $http.post('/api/v1/user/login', myJSON).then(
+                        function(success){
+                            ctrl.mail = '';
+                            ctrl.password = '';
+                            $scope.user.id = success.data.id;
+                            $scope.user.username = success.data.username;
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    )
+                }
+            };
+
+            ctrl.deconnexion = function(){
+                $scope.user.id = undefined;
+                $scope.user.username = '';
+            };
+        },
+        controllerAs: 'ctrl'
     }
 }]);
 
