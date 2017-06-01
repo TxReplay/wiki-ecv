@@ -61,6 +61,7 @@ class ApiPageController extends ApiBaseController
         $query = $this->getAppRepository('PageRevision')
             ->createQueryBuilder('r')
             ->where('r.content LIKE :query')
+            ->andWhere('r.status LIKE \'online\'')
             ->setParameter('query', '%'.$request['query'].'%')
             ->getQuery();
 
