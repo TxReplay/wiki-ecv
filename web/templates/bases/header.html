@@ -22,7 +22,7 @@
             <button class="btn btn-outline-success my-2 my-sm-0" ng-click="ctrl.connexion(ctrl.mail, ctrl.password)" type="submit">Connexion</button>
         </form>
 
-        <button href="/#!/inscription" class="btn btn-outline-success">Inscription</button>
+        <button ng-show="!ctrl.online" href="/#!/inscription" class="btn btn-outline-success">Inscription</button>
 
         <div ng-show="ctrl.online" style="color: white;" class="welcomeMessage" >
             Bonjour {{ctrl.username}}
@@ -33,6 +33,6 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
         </form>
 
-        <button class="btn btn-outline-success logout" ng-click="ctrl.deconnexion()">Déconnexion</button>
+        <button ng-show="ctrl.online" class="btn btn-outline-success logout" ng-click="ctrl.deconnexion()">Déconnexion</button>
     </div>
 </nav>
