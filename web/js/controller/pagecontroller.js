@@ -64,6 +64,7 @@ app.controller('PageController',
             };
 
             ctrl.addNote = function(note){
+                ctrl.showerror = 0;
                 ctrl.nonote = 0;
 
                 if(!note || note === '' || ctrl.user === ''){
@@ -88,6 +89,7 @@ app.controller('PageController',
             };
 
             ctrl.changeNote = function(note){
+                ctrl.showerror = 0;
                 ctrl.nonote = 0;
 
                 if(!note || note === '' || ctrl.user === ''){

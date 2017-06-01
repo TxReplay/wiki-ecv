@@ -1,7 +1,8 @@
 app.controller('SearchController',
-    ['$scope', '$http',
-        function($scope, $http){
-            // yolo
+    ['$scope', '$http', 'user',
+        function($scope, $http, user){
+            var ctrl = this;
+            $scope.user = user;
         }
     ]
 );

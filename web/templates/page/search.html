@@ -1,0 +1,7 @@
+<div ng-repeat="page in ctrl.search">
+    <article>
+        <h5>{{page.title}}</h5>
+        <p>{{page.revisions[page.revisions.length - 1].content}}</p>
+        <a href="/#!/page/{{page.slug}}">Lire la suite</a>
+    </article>
+</div>
