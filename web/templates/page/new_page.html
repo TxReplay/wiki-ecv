@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
             <h2>Création d'une nouvelle page</h2>
             <span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
             <form>
@@ -14,15 +14,15 @@
                     <textarea ng-model="ctrl.contenu" class="form-control" id="page_content"></textarea>
                     <span ng-show="ctrl.nocontenu">Merci de renseigner du contenu</span>
                 </div>
-                Status :
-                <select ng-model="ctrl.status">
+                <label for="page_status">Status :</label>
+                <select ng-model="ctrl.status" id="page_status" class="custom-select">
                     <option value="online">Online</option>
                     <option value="pending_validation">En attente de validation</option>
                     <option value="canceled">Annulé</option>
                     <option value="draft">Brouillon</option>
                 </select>
                 <span ng-show="ctrl.nostatus">Merci de renseigner un status</span>
-                <button ng-click="ctrl.addPage(ctrl.titre, ctrl.contenu, ctrl.status)" type="submit" class="btn btn-primary">Créer</button>
+                <button ng-click="ctrl.addPage(ctrl.titre, ctrl.contenu, ctrl.status)" type="submit" class="btn btn-primary right">Créer</button>
             </form>
         </div>
     </div>
