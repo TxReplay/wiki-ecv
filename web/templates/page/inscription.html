@@ -1,10 +1,34 @@
-<span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
-<input type="text" ng-model="ctrl.username" placeholder="Username">
-<span ng-show="ctrl.nousername">Merci de renseigner un username</span>
-<input type="text" ng-model="ctrl.mail" placeholder="email">
-<span ng-show="ctrl.wrongmail">L'email n'ai pas au bon format</span>
-<input type="password" ng-model="ctrl.password" placeholder="mdp">
-<input type="password" ng-model="ctrl.repeat" placeholder="répété">
-<span ng-show="ctrl.nopass">Merci de renseigner un mot de passe</span>
-<span ng-show="ctrl.wrongpass">Les mots de passe ne sont pas identique</span>
-<button ng-click="ctrl.inscription(ctrl.username, ctrl.mail, ctrl.password, ctrl.repeat)">inscription</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Inscrpition</h2>
+            <form>
+                <div ng-show="ctrl.showerror" class="form-control-feedback">{{ ctrl.message_error }}</div>
+                <div class="form-group">
+                    <label for="username">Pseudo</label>
+                    <input type="text" ng-model="ctrl.username" placeholder="Pseudo" class="form-control" id="username">
+                    <div class="form-control-feedback" ng-show="ctrl.nousername">Merci de renseigner un username</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" ng-model="ctrl.mail" class="form-control" placeholder="Email" id="email">
+                    <div ng-show="ctrl.wrongmail" class="form-control-feedback">L'email n'ai pas au bon format</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" ng-model="ctrl.password" class="form-control" id="password" placeholder="Mot de passe">
+                    <div ng-show="ctrl.nopass" class="form-control-feedback">Merci de renseigner un mot de passe</div>
+                </div>
+                <div class="form-group">
+                    <label for="repeatPassword">Répétez votre mot de passe</label>
+                    <input type="password" ng-model="ctrl.repeat" placeholder="Répétez votre mon de passe" id="repeatPassword" class="form-control">
+                    <div ng-show="ctrl.wrongpass" class="form-control-feedback">Les mots de passe ne sont pas identique</div>
+                </div>
+                <button ng-click="ctrl.inscription(ctrl.username, ctrl.mail, ctrl.password, ctrl.repeat)" class="btn btn-primary">Inscription</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
