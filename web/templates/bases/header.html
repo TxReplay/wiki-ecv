@@ -15,9 +15,11 @@
         </ul>
 
         <form class="form-inline login_form">
-            <input type="email" class="form-control mr-sm-2" placeholder="Adresse Email">
-            <input type="password" class="form-control mr-sm-2" placeholder="Mot de passe">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Connexion</button>
+            <input type="email" ng-model="ctrl.mail" class="form-control mr-sm-2" placeholder="Adresse Email">
+            <span ng-show="ctrl.wrongmail">L'email n'ai pas au bon format</span>
+            <input type="password" ng-model="ctrl.password" class="form-control mr-sm-2" placeholder="Mot de passe">
+            <span ng-show="ctrl.nopass">Merci de renseigner un mot de passe</span>
+            <button class="btn btn-outline-success my-2 my-sm-0" ng-click="ctrl.connexion(ctrl.mail, ctrl.password)" type="submit">Connexion</button>
         </form>
 
         <form class="form-inline my-2 my-lg-0">
