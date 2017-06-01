@@ -31,6 +31,7 @@ app.controller('PageController',
                         for(rate in ctrl.ratings){
                             total += ctrl.ratings[rate]['rating'];
                             if(ctrl.ratings[rate]['user']['id'] === ctrl.user){
+                                ctrl.current_id_rate = ctrl.ratings[rate]['id'];
                                 ctrl.my_note = ctrl.ratings[rate]['rating'];
                                 ctrl.no_custom_note = 0;
                             }
@@ -77,7 +78,6 @@ app.controller('PageController',
 
                     $http.post('/api/v1/page/'+ctrl.slug+'/revision/'+ctrl.id_revision+'/rate', myJSON).then(
                         function(success){
-                            console.log(success);
                         }, function(error){
                             console.log(error);
                             ctrl.showerror = 1;
@@ -100,9 +100,9 @@ app.controller('PageController',
 
                     var myJSON = JSON.stringify(data);
 
-                    $http.post('/api/v1/page/'+ctrl.slug+'/revision/'+ctrl.id_revision+'/rate', myJSON).then(
+                    $http.patch('/api/v1/page/'+ctrl.slug+'/revision/'+ctrl.id_revision+'/rate/'+ctrl.current_id_rate, myJSON).then(
                         function(success){
-                            console.log(success);
+                            ctrl.my_note = note;
                         }, function(error){
                             console.log(error);
                             ctrl.showerror = 1;
