@@ -7,7 +7,16 @@ app.controller('FrontController',
             $http.get('/api/v1/page/last?limit=3&offset=1').then(
                 function(success){
                     ctrl.pages = success.data;
-                    console.log(ctrl.pages);
+                },
+                function(error){
+                    console.log(error);
+                }
+            );
+
+            $http.get('/api/v1/page/best_rated?limit=3&offset=1').then(
+                function(success){
+                    ctrl.best_rated = success.data;
+                    console.log(success);
                 },
                 function(error){
                     console.log(error);
