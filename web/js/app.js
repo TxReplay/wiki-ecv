@@ -64,9 +64,6 @@ app.run(['$rootScope', '$route', function($rootScope, $route) {
 app.directive('header', ['$http', '$window', function($http, $window){
     return {
         restrict: 'EA',
-        scope: {
-            myVar: '=myVar'
-        },
         link: function(scope, element, attrs) {
 
         },
