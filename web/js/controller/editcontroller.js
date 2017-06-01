@@ -51,7 +51,8 @@ app.controller('EditController',
                 if(!ctrl.error){
                     var data = {
                         "id_user" : $scope.user.id,
-                        "content" : content
+                        "content" : content,
+                        "status" : status
                     };
                     var myJSON = JSON.stringify(data);
 

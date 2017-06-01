@@ -4,4 +4,6 @@
 <div class="author">Revision by {{ ctrl.author }}</div>
 <a href="#!/page/{{ ctrl.slug }}">Voir la dernière version</a>
 <a ng-show="ctrl.user" ng-click="ctrl.removeRevision()">Supprimer la revision</a>
+<span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
+<a ng-show="ctrl.user" ng-click="ctrl.setRevision()">Rétablir cette revision</a>
 <span ng-show="ctrl.errorsupp">Vous ne pouvez pas supprimer la révision si il n'y en a qu'une seule</span>

@@ -47,6 +47,26 @@ app.controller('RevisionController',
                     }
                 }
             }
+
+            ctrl.setRevision = function(){
+                var data = {
+                    "id_user" : ctrl.user,
+                    "content" : ctrl.content,
+                    "status" : ctrl.status
+                };
+
+                var myJSON = JSON.stringify(data);
+
+                $http.post('/api/v1/page/'+ctrl.slug+'/revision', myJSON).then(
+                    function(success){
+                        $location.path('/page/'+ctrl.slug);
+                    }, function(error){
+                        console.log(error);
+                        ctrl.showerror = 1;
+                        ctrl.message_error = error.data.message;
+                    }
+                );
+            }
         }
     ]
 );
