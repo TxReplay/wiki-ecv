@@ -2,21 +2,38 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Rating;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 class ApiRatingController extends ApiBaseController
 {
     /**
-     * @Rest\Post("/rating")
+     * @Rest\Post("/page/{page_slug}/revision/{revision_id}/rate")
      * @ApiDoc(
      *     section="Rating",
      *     description="Create a new rating"
      * )
      */
-    public function postRatingAction() {}
+    public function postRatingAction(Request $request, $page_slug, $revision_id) {
+        $data = $request->request->all();
+        $page = $this->getAppRepository('Page')->findOneBySlug($page_slug);
+        $revision = $this->getAppRepository('PageRevision')->findOneBy(['id' => $revision_id, 'page' => $page]);
+        $user = $this->getAppRepository('User')->find($data['user_id']);
+
+        $rating = new Rating();
+        $rating->setRevision($revision);
+        $rating->setRating($data['rating']);
+        $rating->setUser($user);
+
+        $this->getAppManager()->persist($rating);
+        $this->getAppManager()->flush();
+
+        return $this->serialize($rating);
+    }
 
     /**
      * @Rest\Get("/rating/{rating_id}")
@@ -51,5 +68,16 @@ class ApiRatingController extends ApiBaseController
      *     description="Delete a rating by his id"
      * )
      */
-    public function deleteRatingAction($rating_id) {}
+    public function deleteRatingAction($rating_id) {
+        $rating = $this->getAppRepository('Rating')->find($rating_id);
+
+        if (empty($rating)) {
+            return new JsonResponse(['message' => 'Rating not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $this->getAppManager()->remove($rating);
+        $this->getAppManager()->flush();
+
+        return new JsonResponse(['message' => 'Rating successfully deleted.'], Response::HTTP_ACCEPTED);
+    }
 }
