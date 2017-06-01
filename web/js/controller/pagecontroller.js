@@ -30,17 +30,19 @@ app.controller('PageController',
                         var total = 0;
                         for(rate in ctrl.ratings){
                             total += ctrl.ratings[rate]['rating'];
-                            if(ctrl.ratings[rate]['user']['id'] === ctrl.user){
+                            if(parseInt(ctrl.ratings[rate]['user']['id']) === parseInt(ctrl.user)){
                                 ctrl.current_id_rate = ctrl.ratings[rate]['id'];
                                 ctrl.my_note = ctrl.ratings[rate]['rating'];
                                 ctrl.no_custom_note = 0;
                             }
+                            ctrl.last_id_revision = ctrl.ratings[rate]['id'];
                         }
                         if(!ctrl.my_note){
                             ctrl.no_custom_note = 1;
                         }
                         ctrl.current_note = total/ctrl.ratings.length;
                     }else{
+                        ctrl.last_id_revision = -1;
                         ctrl.no_custom_note = 1;
                         ctrl.current_note = 0;
                     }
@@ -79,6 +81,8 @@ app.controller('PageController',
 
                     $http.post('/api/v1/page/'+ctrl.slug+'/revision/'+ctrl.id_revision+'/rate', myJSON).then(
                         function(success){
+                            ctrl.my_note = note;
+                            ctrl.no_custom_note = 0;
                         }, function(error){
                             console.log(error);
                             ctrl.showerror = 1;
@@ -102,9 +106,14 @@ app.controller('PageController',
 
                     var myJSON = JSON.stringify(data);
 
+                    if(!ctrl.current_id_rate){
+                        ctrl.current_id_rate = ctrl.last_id_revision + 1;
+                    }
+
                     $http.patch('/api/v1/page/'+ctrl.slug+'/revision/'+ctrl.id_revision+'/rate/'+ctrl.current_id_rate, myJSON).then(
                         function(success){
                             ctrl.my_note = note;
+                            ctrl.no_custom_note = 0;
                         }, function(error){
                             console.log(error);
                             ctrl.showerror = 1;
