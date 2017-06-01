@@ -71,19 +71,19 @@ class Rating implements StatusInterface
     }
 
     /**
-     * @return PageRevision
+     * @return ArrayCollection
      */
-    public function getPage()
+    public function getRevision()
     {
-        return $this->page;
+        return $this->revision;
     }
 
     /**
-     * @param PageRevision $page
+     * @param ArrayCollection $revision
      */
-    public function setPage($page)
+    public function setRevision($revision)
     {
-        $this->page = $page;
+        $this->revision = $revision;
     }
 
     /**
