@@ -1,6 +1,13 @@
-<div ng-repeat="revision in ctrl.revisions">
-    Révision faite par : {{revision.update_by.username}}<br>
-    Faite le : {{revision.updated_at}}<br>
-    <a href="#!/page/{{ctrl.slug}}/history/{{revision.id}}">Voir cette révision</a>
-    <hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Historique des modifications</h1>
+            <div ng-repeat="revision in ctrl.revisions">
+                Révision faite par : {{revision.update_by.username}}<br>
+                Faite le : {{revision.updated_at}}<br>
+                <a href="#!/page/{{ctrl.slug}}/history/{{revision.id}}">Voir cette révision</a>
+                <hr>
+            </div>
+        </div>
+    </div>
 </div>

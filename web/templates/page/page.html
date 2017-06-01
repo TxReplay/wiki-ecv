@@ -1,28 +1,39 @@
-<h1>{{ ctrl.title }}</h1>
-<div class="status">Status : {{ ctrl.status }}</div>
-<div class="contenu">{{ ctrl.last_revision.content }}</div>
-<div class="author">Last edited by {{ ctrl.last_revision.update_by.username }}</div>
-<a href="#!/page/{{ ctrl.slug }}/history">Voir toutes les modifications</a>
-<a ng-show="ctrl.user" href="#!/page/{{ ctrl.slug }}/edit">Modifier la page</a>
-<a ng-show="ctrl.user" ng-click="ctrl.removePage()">Supprimer la page</a>
-<span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
-<div ng-show="ctrl.my_note">
-    Votre note actuel : {{ctrl.my_note}}<br>
-    Changer votre note :
-    <select ng-model="ctrl.note" ng-init="ctrl.note = ctrl.option.availableOptions[ctrl.my_note - 1].id">
-        <option ng-repeat="option in ctrl.option.availableOptions" value="{{option.id}}">{{option.name}}</option>
-    </select>
-    <span ng-show="ctrl.nonote">Merci de renseigner votre note avant de voter</span>
-    <button ng-click="ctrl.changeNote(ctrl.note)">Changer votre vote</button>
-</div>
-<div ng-show="ctrl.no_custom_note">
-    <div ng-show="ctrl.user">
-        Choisissez votre note :
-        <select ng-model="ctrl.note" ng-init="ctrl.note = ctrl.option.availableOptions[ctrl.my_note - 1].id">
-            <option ng-repeat="option in ctrl.option.availableOptions" value="{{option.id}}">{{option.name}}</option>
-        </select>
-        <span ng-show="ctrl.nonote">Merci de renseigner votre note avant de voter</span>
-        <button ng-click="ctrl.addNote(ctrl.note)">Voter</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h1>{{ ctrl.title }}</h1>
+
+            <div class="status">Status : {{ ctrl.status }}</div>
+            <div class="contenu">{{ ctrl.last_revision.content }}</div>
+            <div class="author">Last edited by {{ ctrl.last_revision.update_by.username }}</div>
+            <a href="#!/page/{{ ctrl.slug }}/history">Voir toutes les modifications</a>
+
+
+            <span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
+            <div ng-show="ctrl.my_note">
+                Votre note actuel : {{ctrl.my_note}}<br>
+                Changer votre note :
+                <select ng-model="ctrl.note" ng-init="ctrl.note = ctrl.option.availableOptions[ctrl.my_note - 1].id">
+                    <option ng-repeat="option in ctrl.option.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                </select>
+                <span ng-show="ctrl.nonote">Merci de renseigner votre note avant de voter</span>
+                <button ng-click="ctrl.changeNote(ctrl.note)">Changer votre vote</button>
+            </div>
+            <div ng-show="ctrl.no_custom_note">
+                <div ng-show="ctrl.user">
+                    Choisissez votre note :
+                    <select ng-model="ctrl.note" ng-init="ctrl.note = ctrl.option.availableOptions[ctrl.my_note - 1].id" class="custom-select">
+                        <option ng-repeat="option in ctrl.option.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                    </select>
+                    <span ng-show="ctrl.nonote">Merci de renseigner votre note avant de voter</span>
+                    <button ng-click="ctrl.addNote(ctrl.note)" class="btn btn-primary">Voter</button>
+                </div>
+            </div>
+            <div class="current-note">Note actuel de cette page : {{ ctrl.current_note }}/5</div>
+
+
+            <a ng-show="ctrl.user" href="#!/page/{{ ctrl.slug }}/edit" class="btn btn-primary">Modifier la page</a>
+            <a ng-show="ctrl.user" href="" ng-click="ctrl.removePage()" class="btn btn-danger">Supprimer la page</a>
+        </div>
     </div>
 </div>
-<div class="current-note">Note actuel de cette page : {{ ctrl.current_note }}/5</div>

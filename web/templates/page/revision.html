@@ -1,9 +1,17 @@
-<h1>{{ ctrl.title }}</h1>
-<div class="status">Status : {{ ctrl.status }}</div>
-<div class="contenu">{{ ctrl.content }}</div>
-<div class="author">Revision by {{ ctrl.author }}</div>
-<a href="#!/page/{{ ctrl.slug }}">Voir la dernière version</a>
-<a ng-show="ctrl.user" ng-click="ctrl.removeRevision()">Supprimer la revision</a>
-<span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
-<a ng-show="ctrl.user" ng-click="ctrl.setRevision()">Rétablir cette revision</a>
-<span ng-show="ctrl.errorsupp">Vous ne pouvez pas supprimer la révision si il n'y en a qu'une seule</span>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ ctrl.title }}</h1>
+
+            <div class="status">Status : {{ ctrl.status }}</div>
+            <div class="contenu">{{ ctrl.content }}</div>
+            <div class="author">Revision by {{ ctrl.author }}</div>
+
+            <a href="#!/page/{{ ctrl.slug }}" class="btn btn-primary">Voir la dernière version</a>
+            <button ng-show="ctrl.user" ng-click="ctrl.removeRevision()" class="btn btn-danger">Supprimer la revision</button>
+            <span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
+            <button ng-show="ctrl.user" ng-click="ctrl.setRevision()" class="btn btn-warning">Rétablir cette revision</button>
+            <span ng-show="ctrl.errorsupp">Vous ne pouvez pas supprimer la révision si il n'y en a qu'une seule</span>
+        </div>
+    </div>
+</div>

@@ -13,13 +13,13 @@
 
         <form class="form-inline login_form" ng-show="!ctrl.online">
             <input type="email" ng-model="ctrl.mail" class="form-control mr-sm-2" placeholder="Adresse Email">
-            <span ng-show="ctrl.wrongmail">L'email n'ai pas au bon format</span>
+            <span ng-show="ctrl.wrongmail" class="white">L'email n'ai pas au bon format</span>
             <input type="password" ng-model="ctrl.password" class="form-control mr-sm-2" placeholder="Mot de passe">
-            <span ng-show="ctrl.nopass">Merci de renseigner un mot de passe</span>
+            <span ng-show="ctrl.nopass" class="white">Merci de renseigner un mot de passe</span>
             <button class="btn btn-outline-success my-2 my-sm-0" ng-click="ctrl.connexion(ctrl.mail, ctrl.password)" type="submit">Connexion</button>
         </form>
 
-        <button ng-show="!ctrl.online" href="/#!/inscription" class="btn btn-outline-success">Inscription</button>
+        <a ng-show="!ctrl.online" href="/#!/inscription" class="btn btn-outline-success">Inscription</a>
 
         <div ng-show="ctrl.online" style="color: white;" class="welcomeMessage" >
             Bonjour {{ctrl.username}}

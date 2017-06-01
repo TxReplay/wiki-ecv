@@ -1,15 +1,25 @@
-<h1>Modification de </h1>
-<h2>{{ ctrl.title }}</h2>
-<span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
-<textarea ng-model="ctrl.content" placeholder="contenu de la page"></textarea>
-<span ng-show="ctrl.empty">Merci de ne pas laisser le contenu vide</span>
-<span ng-show="ctrl.nochange">Merci de modifier le contenu</span>
-Status :
-<select ng-model="ctrl.status">
-    <option value="online">Online</option>
-    <option value="pending_validation">En attente de validation</option>
-    <option value="canceled">Annulé</option>
-    <option value="draft">Brouillon</option>
-</select>
-<span ng-show="ctrl.nostatus">Merci d'indiquer un status</span>
-<button ng-click="ctrl.modification(ctrl.content, ctrl.status)">Modifier</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Modification de : "{{ ctrl.title }}"</h1>
+            <span ng-show="ctrl.showerror">{{ ctrl.message_error }}</span>
+            <form>
+                <div class="form-group">
+                    <label for="contenu">Contenu de la page</label>
+                    <textarea ng-model="ctrl.content" class="form-control" placeholder="Contenu de la page" id="contenu"></textarea>
+                </div>
+            </form>
+            <span ng-show="ctrl.empty">Merci de ne pas laisser le contenu vide</span>
+            <span ng-show="ctrl.nochange">Merci de modifier le contenu</span>
+            Status :
+            <select ng-model="ctrl.status" class="custom-select">
+                <option value="online">Online</option>
+                <option value="pending_validation">En attente de validation</option>
+                <option value="canceled">Annulé</option>
+                <option value="draft">Brouillon</option>
+            </select>
+            <span ng-show="ctrl.nostatus">Merci d'indiquer un status</span>
+            <button ng-click="ctrl.modification(ctrl.content, ctrl.status)" class="btn btn-primary right">Modifier</button>
+        </div>
+    </div>
+</div>
