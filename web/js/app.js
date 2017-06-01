@@ -116,6 +116,7 @@ app.directive('header', ['$http', '$window', function($http, $window){
 
                     $http.post('/api/v1/user/login', myJSON).then(
                         function(success){
+                            console.log(success)
                             ctrl.mail = '';
                             ctrl.password = '';
                             $scope.user.id = success.data.id;
