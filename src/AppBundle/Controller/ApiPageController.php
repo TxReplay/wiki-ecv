@@ -49,6 +49,25 @@ class ApiPageController extends ApiBaseController
     }
 
     /**
+     * @Rest\Post("/page/search")
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Search a page page with a given limit"
+     * )
+     */
+    public function getPageSearchAction(Request $request) {
+        $request = $request->request->all();
+
+        $query = $this->getAppRepository('PageRevision')
+            ->createQueryBuilder('r')
+            ->where('r.content LIKE :query')
+            ->setParameter('query', '%'.$request['query'].'%')
+            ->getQuery();
+
+        return $this->serialize($query->getResult());
+    }
+
+    /**
      * @Rest\Get("/page/best_rated")
      * @ApiDoc(
      *     section="Page",
@@ -57,7 +76,7 @@ class ApiPageController extends ApiBaseController
      */
     public function getPageBestRatedAction(Request $request) {
         $data = $request->query->all();
-        $page = $this->getAppRepository('Page')->findBy([], ['createdAt' => 'DESC'], $data['limit'], $data['offset']);
+        $page = $this->getAppRepository('Page')->findBy([], ['createdAt' => 'ASC'], $data['limit'], $data['offset']);
 
         if (empty($page)) {
             return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
