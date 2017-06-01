@@ -14,6 +14,12 @@ app.controller('HistoryController',
                     console.log(error);
                 }
             );
+
+            $scope.$watch(function(){return user;}, function(value, oldValue){
+                if(oldValue !== value){
+                    ctrl.user = value.id;
+                }
+            }, true);
         }
     ]
 );

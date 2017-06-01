@@ -66,7 +66,13 @@ app.controller('RevisionController',
                         ctrl.message_error = error.data.message;
                     }
                 );
-            }
+            };
+
+            $scope.$watch(function(){return user;}, function(value, oldValue){
+                if(oldValue !== value){
+                    ctrl.user = value.id;
+                }
+            }, true);
         }
     ]
 );

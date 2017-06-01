@@ -64,9 +64,6 @@ app.run(['$rootScope', '$route', function($rootScope, $route) {
 app.directive('header', ['$http', '$window', function($http, $window){
     return {
         restrict: 'EA',
-        scope: {
-            myVar: '=myVar'
-        },
         link: function(scope, element, attrs) {
 
         },
@@ -82,6 +79,16 @@ app.directive('header', ['$http', '$window', function($http, $window){
                         ctrl.online = 0;
                     }else{
                         ctrl.online = 1;
+                    }
+                }else{
+                    if(document.cookie){
+                        ctrl.id = value.id;
+                        ctrl.username = value.username;
+                        if(value.username === '' || typeof value.username === 'undefined'){
+                            ctrl.online = 0;
+                        }else{
+                            ctrl.online = 1;
+                        }
                     }
                 }
             }, true);
@@ -116,6 +123,8 @@ app.directive('header', ['$http', '$window', function($http, $window){
                             ctrl.password = '';
                             $scope.user.id = success.data.id;
                             $scope.user.username = success.data.username;
+                            document.cookie = "id="+success.data.id;
+                            document.cookie = "username="+success.data.username;
                         },
                         function(error){
                             console.log(error);
@@ -127,7 +136,23 @@ app.directive('header', ['$http', '$window', function($http, $window){
             ctrl.deconnexion = function(){
                 $scope.user.id = undefined;
                 $scope.user.username = '';
+                document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             };
+
+            var cookies = document.cookie;
+            if(cookies !== ''){
+                var cookies_tab = cookies.split(";");
+                for(cookie in cookies_tab){
+                    var current = cookies_tab[cookie].split("=");
+                    if(current[0] === 'id'){
+                        $scope.user.id = current[1];
+                    }
+                    if(current[0] === ' username'){
+                        $scope.user.username = current[1];
+                    }
+                }
+            }
         },
         controllerAs: 'ctrl'
     }
