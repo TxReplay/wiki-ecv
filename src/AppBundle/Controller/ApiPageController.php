@@ -49,6 +49,24 @@ class ApiPageController extends ApiBaseController
     }
 
     /**
+     * @Rest\Get("/page/best_rated")
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Get the best rated page with a given limit"
+     * )
+     */
+    public function getPageBestRatedAction(Request $request) {
+        $data = $request->query->all();
+        $page = $this->getAppRepository('Page')->findBy([], ['createdAt' => 'DESC'], $data['limit'], $data['offset']);
+
+        if (empty($page)) {
+            return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->serialize($page);
+    }
+
+    /**
      * @Rest\Get("/page/{page_slug}")
      * @ApiDoc(
      *     section="Page",
