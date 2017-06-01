@@ -138,6 +138,27 @@ app.directive('header', ['$http', '$window', function($http, $window){
                 document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             };
 
+            ctrl.search = function(query){
+                if(query && query !== ''){
+                    var data = {
+                        "query" : query
+                    };
+
+                    var myJSON = JSON.stringify(data);
+
+                    $http.post('/api/v1/page/search', myJSON).then(
+                        function(success){
+                            $scope.user.search = success.data;
+                            $scope.user.query = query;
+                            $location.path('/search');
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    )
+                }
+            };
+
             var cookies = document.cookie;
             if(cookies !== ''){
                 var cookies_tab = cookies.split(";");

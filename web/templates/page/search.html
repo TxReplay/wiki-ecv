@@ -1,7 +1,8 @@
+<h1>Recherche pour : {{ctrl.query}}</h1>
 <div ng-repeat="page in ctrl.search">
     <article>
-        <h5>{{page.title}}</h5>
-        <p>{{page.revisions[page.revisions.length - 1].content}}</p>
-        <a href="/#!/page/{{page.slug}}">Lire la suite</a>
+        <h5>{{page.page.title}}</h5>
+        <p>{{page.content}}</p>
+        <a href="/#!/page/{{page.page.slug}}">Lire la suite</a>
     </article>
 </div>
