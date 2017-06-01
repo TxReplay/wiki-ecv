@@ -31,6 +31,61 @@ class ApiPageController extends ApiBaseController
     }
 
     /**
+     * @Rest\Get("/page/last")
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Get the latest page with a given limit"
+     * )
+     */
+    public function getPageLastAction(Request $request) {
+                $data = $request->query->all();
+                $page = $this->getAppRepository('Page')->findBy([], ['createdAt' => 'DESC'], $data['limit'], $data['offset']);
+
+                if (empty($page)) {
+                    return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
+                }
+
+                return $this->serialize($page);
+    }
+
+    /**
+     * @Rest\Post("/page/search")
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Search a page page with a given limit"
+     * )
+     */
+    public function getPageSearchAction(Request $request) {
+        $request = $request->request->all();
+
+        $query = $this->getAppRepository('PageRevision')
+            ->createQueryBuilder('r')
+            ->where('r.content LIKE :query')
+            ->setParameter('query', '%'.$request['query'].'%')
+            ->getQuery();
+
+        return $this->serialize($query->getResult());
+    }
+
+    /**
+     * @Rest\Get("/page/best_rated")
+     * @ApiDoc(
+     *     section="Page",
+     *     description="Get the best rated page with a given limit"
+     * )
+     */
+    public function getPageBestRatedAction(Request $request) {
+        $data = $request->query->all();
+        $page = $this->getAppRepository('Page')->findBy([], ['createdAt' => 'ASC'], $data['limit'], $data['offset']);
+
+        if (empty($page)) {
+            return new JsonResponse(['message' => 'Page not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->serialize($page);
+    }
+
+    /**
      * @Rest\Get("/page/{page_slug}")
      * @ApiDoc(
      *     section="Page",
@@ -75,4 +130,5 @@ class ApiPageController extends ApiBaseController
 
         return new JsonResponse(['message' => 'Page successfully deleted.'], Response::HTTP_ACCEPTED);
     }
+
 }

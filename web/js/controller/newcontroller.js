@@ -8,8 +8,6 @@ app.controller('NewController',
                 $location.path('/inscription');
             }
 
-            console.log($scope);
-
             ctrl.showerror = 0;
             ctrl.titre = "";
             ctrl.contenu = "";

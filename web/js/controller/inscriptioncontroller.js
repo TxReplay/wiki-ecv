@@ -55,6 +55,8 @@ app.controller('InscriptionController',
                         function(success){
                             $scope.user.id = success.data.id_user;
                             $scope.user.username = username;
+                            document.cookie = "id="+success.data.id_user;
+                            document.cookie = "username="+username;
                             $location.path('/');
                         }, function(error){
                             console.log(error);

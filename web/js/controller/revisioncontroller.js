@@ -49,6 +49,8 @@ app.controller('RevisionController',
             }
 
             ctrl.setRevision = function(){
+                ctrl.showerror = 0;
+
                 var data = {
                     "id_user" : ctrl.user,
                     "content" : ctrl.content,

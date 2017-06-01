@@ -9,7 +9,7 @@ app.config(['$routeProvider', function($routeProvider){
         title: 'homepage'
     }).
     when('/search', {
-        templateUrl: 'templates/index.html',
+        templateUrl: 'templates/page/search.html',
         controller: "SearchController",
         controllerAs: 'ctrl',
         title: 'Recherche'
@@ -64,11 +64,8 @@ app.run(['$rootScope', '$route', function($rootScope, $route) {
 app.directive('header', ['$http', '$window', function($http, $window){
     return {
         restrict: 'EA',
-        link: function(scope, element, attrs) {
-
-        },
         templateUrl: '/templates/bases/header.html',
-        controller: function($scope, $http, user) {
+        controller: function($scope, $http, $location, user) {
             var ctrl = this;
             $scope.user = user;
             $scope.$watch(function(){return user;}, function(value, oldValue){
@@ -127,6 +124,7 @@ app.directive('header', ['$http', '$window', function($http, $window){
                             document.cookie = "username="+success.data.username;
                         },
                         function(error){
+                            ctrl.showerror = 1;
                             console.log(error);
                         }
                     )
@@ -138,6 +136,27 @@ app.directive('header', ['$http', '$window', function($http, $window){
                 $scope.user.username = '';
                 document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            };
+
+            ctrl.search = function(query){
+                if(query && query !== ''){
+                    var data = {
+                        "query" : query
+                    };
+
+                    var myJSON = JSON.stringify(data);
+
+                    $http.post('/api/v1/page/search', myJSON).then(
+                        function(success){
+                            $scope.user.search = success.data;
+                            $scope.user.query = query;
+                            $location.path('/search');
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    )
+                }
             };
 
             var cookies = document.cookie;
