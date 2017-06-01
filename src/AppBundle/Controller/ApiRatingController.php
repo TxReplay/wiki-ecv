@@ -53,13 +53,26 @@ class ApiRatingController extends ApiBaseController
     }
 
     /**
-     * @Rest\Put("/rating/{rating_id}")
+     * @Rest\Patch("/page/{page_slug}/revision/{revision_id}/rate/{rating_id}")
      * @ApiDoc(
      *     section="Rating",
      *     description="Update a rating by his id"
      * )
      */
-    public function putRatingAction($rating_id) {}
+    public function patchRatingAction(Request $request, $page_slug, $revision_id, $rating_id) {
+        $data = $request->request->all();
+        $page = $this->getAppRepository('Page')->findOneBySlug($page_slug);
+        $revision = $this->getAppRepository('PageRevision')->findOneBy(['id' => $revision_id, 'page' => $page]);
+        $user = $this->getAppRepository('User')->find($data['user_id']);
+        $rating = $this->getAppRepository('Rating')->findOneBy(['id' => $rating_id, 'revision' => $revision, 'user' => $user ]);
+
+        $rating->setRating($data['rating']);
+
+        $this->getAppManager()->persist($rating);
+        $this->getAppManager()->flush();
+
+        return $this->serialize($rating);
+    }
 
     /**
      * @Rest\Delete("/rating/{rating_id}")
