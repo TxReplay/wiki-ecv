@@ -126,8 +126,6 @@ app.controller('PageController',
                                 var total = 0;
                                 for(rate in ctrl.ratings){
                                     total += ctrl.ratings[rate]['rating'];
-                                    console.log(ctrl.ratings[rate]['user']['id']);
-                                    console.log(ctrl.user);
                                     if(ctrl.ratings[rate]['user']['id'] === ctrl.user){
                                         ctrl.my_note = ctrl.ratings[rate]['rating'];
                                         ctrl.no_custom_note = 0;
