@@ -4,7 +4,10 @@ app.controller('InscriptionController',
             var ctrl = this;
 
             $scope.user = user;
-            $scope.user.id = 1;
+
+            if($scope.user.id){
+                $location.path('/');
+            }
 
             ctrl.username = "";
             ctrl.mail = "";
@@ -51,6 +54,7 @@ app.controller('InscriptionController',
                     $http.post('/api/v1/user/register', myJSON).then(
                         function(success){
                             $scope.user.id = success.data.id_user;
+                            $scope.user.username = username;
                             $location.path('/');
                         }, function(error){
                             console.log(error);

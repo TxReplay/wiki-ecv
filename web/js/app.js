@@ -76,7 +76,13 @@ app.directive('header', ['$http', '$window', function($http, $window){
             $scope.user = user;
             $scope.$watch(function(){return user;}, function(value, oldValue){
                 if(oldValue !== value){
-                    ctrl.user = value.id;
+                    ctrl.id = value.id;
+                    ctrl.username = value.username;
+                    if(value.username === '' || typeof value.username === 'undefined'){
+                        ctrl.online = 0;
+                    }else{
+                        ctrl.online = 1;
+                    }
                 }
             }, true);
 
@@ -106,15 +112,22 @@ app.directive('header', ['$http', '$window', function($http, $window){
 
                     $http.post('/api/v1/user/login', myJSON).then(
                         function(success){
-                            console.log(success);
+                            ctrl.mail = '';
+                            ctrl.password = '';
+                            $scope.user.id = success.data.id;
+                            $scope.user.username = success.data.username;
                         },
                         function(error){
                             console.log(error);
                         }
                     )
                 }
-            }
+            };
 
+            ctrl.deconnexion = function(){
+                $scope.user.id = undefined;
+                $scope.user.username = '';
+            };
         },
         controllerAs: 'ctrl'
     }
