@@ -16,5 +16,25 @@
                 <a href="#">Lire la suite</a>
             </article>
         </div>
+
+        
+        <div class="col-md-6">
+            <div ng-repeat="page in ctrl.pages">
+                <article>
+                    <h5>{{page.title}}</h5>
+                    <p>{{page.revisions[page.revisions.length - 1].content}}</p>
+                    <a href="/#!/page/{{page.slug}}">Lire la suite</a>
+                </article>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div ng-repeat="page in ctrl.best_rated">
+                <article>
+                    <h5>{{page.title}}</h5>
+                    <p>{{page.revisions[page.revisions.length - 1].content}}</p>
+                    <a href="/#!/page/{{page.slug}}">Lire la suite</a>
+                </article>
+            </div>
+        </div>
     </div>
 </div>

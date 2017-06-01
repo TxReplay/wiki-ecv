@@ -7,9 +7,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Toutes les pages</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#!/page/new">Créer une page</a>
             </li>
         </ul>
@@ -29,8 +26,8 @@
         </div>
 
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2 ml-sm-2" type="text" placeholder="Rechercher">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+            <input class="form-control mr-sm-2" ng-model="ctrl.query" type="text" placeholder="Rechercher">
+            <button class="btn btn-outline-success my-2 my-sm-0" ng-click="ctrl.search(ctrl.query)" type="submit">Go</button>
         </form>
 
         <button ng-show="ctrl.online" class="btn btn-outline-success logout" ng-click="ctrl.deconnexion()">Déconnexion</button>

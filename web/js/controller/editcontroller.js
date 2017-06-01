@@ -29,6 +29,7 @@ app.controller('EditController',
 
             ctrl.modification = function(content, status){
                 // Init erreur
+                ctrl.showerror = 0;
                 ctrl.error = 0;
                 ctrl.empty = 0;
                 ctrl.nochange = 0;
